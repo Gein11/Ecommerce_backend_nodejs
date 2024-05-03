@@ -15,6 +15,10 @@ app.use(
     extended: true,
   })
 );
+require("./tests/inventory.test");
+const productTest = require("./tests/product.test");
+productTest.purchaseProduct("product:001", 10);
+
 //init db
 require("./dbs/init.mongodb");
 const initRedis = require("./dbs/init.redit");
