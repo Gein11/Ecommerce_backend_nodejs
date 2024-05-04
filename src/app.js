@@ -33,6 +33,7 @@ app.use((req, res, next) => {
   error.status = 404;
   next(error);
 });
+// middleware for error handling
 app.use((error, req, res, next) => {
   const statusCode = error.status || 500;
   return res.status(statusCode).json({
