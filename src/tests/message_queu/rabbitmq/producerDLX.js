@@ -37,7 +37,7 @@ const runProducer = async () => {
     console.log(`producer message:: ${msg}`);
     await channel.sendToQueue(queueResult.queue, Buffer.from(msg), {
       expiration: "10000", // message will be expired after 10s
-      persistent: true,
+      persistent: true, // persistent will save the message to disk
     });
     setTimeout(() => {
       connection.close();
