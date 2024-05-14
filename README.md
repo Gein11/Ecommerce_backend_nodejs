@@ -170,3 +170,16 @@ ALTER USER root@'localhost' IDENTIFIED WITH mysql_native_password BY 'AaaaBbb1!'
 import mysql local to ec2
 
 ~ scp -i ~/.ssh/key.pem ~/Downloads/mysqlsampledatabase.sql ec2-user@ec2-54-221-123-136.compute-1.amazonaws.com:~/
+// section 73
+See all files in one folder
+~ ls -la
+
+active svc
+~ sudo ./svc.sh install
+~ sudo ./svc.sh start
+
+~curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
+
+actions-runner/_work/Ecommerce_backend_nodejs/Ecommerce_backend_nodejs$ ~ sudo npm install pm2@latest -g
+
+pm2 list ->  pm2 start server.js --name=shopdev-backend
