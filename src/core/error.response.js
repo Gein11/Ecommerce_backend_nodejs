@@ -1,61 +1,81 @@
-'use strict'
+"use strict";
 
 const StatusCode = {
-    FORBIDDEN: 403,
-    CONFLICT: 409
-}
+  FORBIDDEN: 403,
+  CONFLICT: 409,
+};
 
 const ReasonStatusCode = {
-    FORBIDDEN: 'Bad Request Error',
-    CONFLICT: 'Conflict Error'
-}
+  FORBIDDEN: "Bad Request Error",
+  CONFLICT: "Conflict Error",
+};
 
-const {
-    StatusCodes,
-    ReasonPhrases
-} = require('../utils/httpStatusCode')
+const { StatusCodes, ReasonPhrases } = require("../utils/httpStatusCode");
 
 class ErrorResponse extends Error {
-    constructor(message, status) {
-        super(message)
-        this.status = status
-    }
+  constructor(message, status) {
+    super(message);
+    this.status = status;
+  }
 }
 
-
 class ConflictRequestError extends ErrorResponse {
-    constructor(message = ReasonStatusCode.CONFLICT, statusCode = StatusCode.FORBIDDEN) {
-        super(message, statusCode)
-    }
+  constructor(
+    message = ReasonStatusCode.CONFLICT,
+    statusCode = StatusCode.FORBIDDEN
+  ) {
+    super(message, statusCode);
+  }
 }
 
 class BadRequestError extends ErrorResponse {
-    constructor(message = ReasonStatusCode.CONFLICT, statusCode = StatusCode.FORBIDDEN) {
-        super(message, statusCode)
-    }
+  constructor(
+    message = ReasonStatusCode.CONFLICT,
+    statusCode = StatusCode.FORBIDDEN
+  ) {
+    super(message, statusCode);
+  }
 }
 
 class AuthFailureError extends ErrorResponse {
-    constructor(message = ReasonPhrases.UNAUTHORIZED, statusCode = StatusCode.UNAUTHORIZED) {
-        super(message, statusCode)
-    }
+  constructor(
+    message = ReasonPhrases.UNAUTHORIZED,
+    statusCode = StatusCode.UNAUTHORIZED
+  ) {
+    super(message, statusCode);
+  }
 }
 
 class NotFoundError extends ErrorResponse {
-    constructor(message = ReasonPhrases.NOT_FOUND, statusCode = StatusCode.NOT_FOUND) {
-        super(message, statusCode)
-    }
+  constructor(
+    message = ReasonPhrases.NOT_FOUND,
+    statusCode = StatusCode.NOT_FOUND
+  ) {
+    super(message, statusCode);
+  }
 }
 class ForbiddenError extends ErrorResponse {
-    constructor(message = ReasonPhrases.NOT_FOUND, statusCode = StatusCode.NOT_FOUND) {
-        super(message, statusCode)
-    }
+  constructor(
+    message = ReasonPhrases.NOT_FOUND,
+    statusCode = StatusCode.NOT_FOUND
+  ) {
+    super(message, statusCode);
+  }
+}
+class RedisErrorResponse extends ErrorResponse {
+  constructor(
+    message = ReasonPhrases.INTERNAL_SERVER_ERROR,
+    statusCode = StatusCode.INTERNAL_SERVER_ERROR
+  ) {
+    super(message, statusCode);
+  }
 }
 
 module.exports = {
-    ConflictRequestError,
-    BadRequestError,
-    AuthFailureError,
-    NotFoundError,
-    ForbiddenError
-}
+  ConflictRequestError,
+  BadRequestError,
+  AuthFailureError,
+  NotFoundError,
+  ForbiddenError,
+  RedisErrorResponse,
+};

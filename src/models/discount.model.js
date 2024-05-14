@@ -59,7 +59,8 @@ var discountSchema = new Schema(
     discount_min_order_value: {
       type: Number,
       required: true,
-    }, // min order to apply discount
+    }, //min order to apply discount đơn hàng tối thiểu để sài discount
+
     discount_shopId: {
       type: Schema.Types.ObjectId,
       ref: "Shop",

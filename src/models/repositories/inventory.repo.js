@@ -13,4 +13,26 @@ const insertInventory = async ({
     inven_location: location,
   });
 };
-module.exports = { insertInventory };
+
+const reservationInventory = async ({ productId, quantity, cartId }) => {
+  //tru so luong dat hang trong kho
+  const query = ({
+      inven_productId: convertToObjectIdMongodb(productId),
+      inven_stock: { $gte: quantity },
+    }.updateSet = {
+      $inc: {
+        inven_stock: -quantity,
+      },
+      $push: {
+        inven_reservations: {
+          quantity,
+          cartId,
+          createOn: new Date(),
+        },
+      },
+    }),
+    options = { upsert: true, new: true };
+  return await inventory.updateOne(query, update, options);
+};
+
+module.exports = { insertInventory, reservationInventory };
