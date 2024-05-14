@@ -24,10 +24,10 @@ router.use("/v1/api/cart", require("./cart"));
 
 router.use("/v1/api", require("./access"));
 
-// router.get('/', (req, res, next) => {
-//     return res.status(200).json({
-//         message: 'Welcome to nodejs'
-//     })
-// })
+router.get("/checkstatus", (req, res, next) => {
+  return res.status(200).json({
+    message: "Welcome to nodejs",
+  });
+});
 
 module.exports = router;

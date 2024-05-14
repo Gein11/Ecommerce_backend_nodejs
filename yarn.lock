@@ -288,6 +288,14 @@
     "@smithy/util-utf8" "^2.3.0"
     tslib "^2.6.2"
 
+"@aws-sdk/cloudfront-signer@^3.567.0":
+  version "3.567.0"
+  resolved "https://registry.npmjs.org/@aws-sdk/cloudfront-signer/-/cloudfront-signer-3.567.0.tgz"
+  integrity sha512-yCWkdXzmgrhavbj8rRAuk6S8m4up+Bm6hn4FmsrFt0BUZtDgWLu0sW8A6Vmciuc9/vw40gW25S2fDs2NWmRMjA==
+  dependencies:
+    "@smithy/url-parser" "^2.2.0"
+    tslib "^2.6.2"
+
 "@aws-sdk/core@3.567.0":
   version "3.567.0"
   resolved "https://registry.npmjs.org/@aws-sdk/core/-/core-3.567.0.tgz"

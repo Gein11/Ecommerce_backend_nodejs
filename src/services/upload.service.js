@@ -4,7 +4,10 @@ const { PutObjectCommand } = require("@aws-sdk/client-s3");
 const cloudinary = require("../configs/config.cloudinary");
 const { s3, GetObjectCommand } = require("../configs/config.aws");
 const crypto = require("crypto");
+const urlImagePublic = "https://d38gwajef5w8wl.cloudfront.net";
 const { getSignedUrl } = require("@aws-sdk/s3-request-presigner");
+// const { getSignedUrl } = require("@aws-sdk/cloudfront-signer");
+const { get } = require("http");
 // const
 // upload file use S3Clinet
 const ranDomName = () => crypto.randomBytes(16).toString("hex");
@@ -20,6 +23,7 @@ const uploadImageFromLocalS3 = async ({ file }) => {
     });
 
     const result = await s3.send(command);
+    // Use S3
 
     const singedUrl = new GetObjectCommand({
       Bucket: process.env.AWS_BUCKET_NAME,
@@ -27,7 +31,23 @@ const uploadImageFromLocalS3 = async ({ file }) => {
     });
     // getSignedUrl export url to public
     const url = await getSignedUrl(s3, singedUrl, { expiresIn: 3600 });
-    return url;
+    return {
+      url: `${urlImagePublic}/${randomeImageName}`,
+      result,
+    };
+    //End use S3
+
+    // const url = getSignedUrl({
+    //   url: `${urlImagePublic}/${randomeImageName}`,
+    //   keyPairId: process.env.AWS_BUCKET_KEY_PAIR_ID,
+    //   dateLessThan: new Date(Date.now() + 1000 * 60), // expires 60s
+    //   privateKey: process.env.AWS_BUCKET_PRIVATE_KEY_ID,
+    // });
+
+    // return {
+    //   url,
+    //   result,
+    // };
   } catch (error) {
     console.error(error);
   }

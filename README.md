@@ -110,3 +110,55 @@ STARTS '2023-10-01 04:05:09' -- bat dau sau thoi gian nay la start
 ON COMPLETION PRESERVE ENABLE -- khong xoa bo count thoi gian khi thuc hien xong
 DO
 CALL create_table_auto_month(); -- cau lenh create table
+
+Section 70
+mv server-shopdev-key-pair.pem ~/.ssh/
+
+chmod 400 ~/.ssh/server-shopdev-key-pair.pem
+
+ssh -i "~/.ssh/server-shopdev-key-pair.pem" ubuntu@ec2-13-229-146-210.ap-southeast-1.compute.amazonaws.com
+
+sudo apt-get update
+
+sudo apt-get install nginx
+
+sudo systemctl status nginx
+
+curl localhost
+
+sudo vim /var/www/html/index.nginx-debian.html
+
+Section71
+Access SSH Like section 70
+
+## config mysql on ec2
+
+~ sudo amazon-linux-extras install epel -y
+
+// get mysql on community
+~ sudo yum install https://dev.mysql.com/get/mysql80-community-release-el7-5.noarch.rpm
+// install mysql
+~ sudo yum install mysql-community-server
+
+~ sudo systemctl enable mysqld
+// start mysql
+~ sudo systemctl start mysqld
+// check status
+~ sudo systemctl status mysqld
+
+Get pass for root
+
+~ sudo cat /var/log/mysqld.log | grep "temporary password"
+
+Login
+~ mysql -uroot -p
+
+change pass:
+
+ALTER USER root@'localhost' IDENTIFIED WITH mysql_native_password BY 'AaaaBbb1!';
+
+//Section 72 Import Mysql local to EC2 và cho phép truy cập mysql từ xa
+
+import mysql local to ec2
+
+~ scp -i ~/.ssh/key.pem ~/Downloads/mysqlsampledatabase.sql ec2-user@ec2-54-221-123-136.compute-1.amazonaws.com:~/
